@@ -187,12 +187,6 @@ h3,
   background: var(--color-background);
 }
 
-/* Pushes the nav and controls to the right edge. Using an auto margin
-   rather than space-between keeps them grouped as one cluster. */
-.logo {
-  margin-right: auto;
-}
-
 .header-controls {
   display: flex;
   align-items: center;
@@ -204,13 +198,21 @@ h3,
   display: none;
 }
 
+/* margin-right:auto pushes the nav and controls to the right edge —
+   an auto margin rather than space-between keeps them one cluster. */
 .logo {
+  margin-right: auto;
   font-family: var(--font-heading);
   font-size: 24px;
   line-height: 1.5;
   letter-spacing: 0.48px;
   white-space: nowrap;
   text-decoration: none;
+  transition: opacity var(--transition-duration) var(--transition-ease);
+}
+
+.logo:hover {
+  opacity: 0.96;
 }
 
 .logo-name {
@@ -258,9 +260,11 @@ h3,
   text-decoration: none;
   white-space: nowrap;
   border-bottom: 2px solid transparent;
+  /* border-color, not border-bottom-color: mobile marks the active and
+     hovered item with a left border instead. */
   transition:
     color var(--transition-duration) var(--transition-ease),
-    border-bottom-color var(--transition-duration) var(--transition-ease);
+    border-color var(--transition-duration) var(--transition-ease);
 }
 
 .nav a:hover {
@@ -716,10 +720,23 @@ h3,
   /* Full-width rows read better than centred pills when stacked, and a
      border-bottom here would look like a divider rather than an
      indicator — the current page is shown by colour alone. */
+  /* Stacked rows take a left border instead of the desktop underline.
+     It is always 2px — transparent at rest — so the text never shifts
+     when it turns accent on hover or on the current page. */
   .nav a {
-    padding: 12px 0;
+    padding: 12px 0 12px 12px;
     text-align: left;
     border-bottom: 0;
+    border-left: 2px solid transparent;
+  }
+
+  .nav a:hover {
+    border-left-color: var(--color-accent-50);
+  }
+
+  /* After :hover, so the current page keeps the solid rule. */
+  .nav a[aria-current="page"] {
+    border-left-color: var(--color-accent);
   }
 
   .content {
