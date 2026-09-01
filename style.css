@@ -709,7 +709,9 @@ h3,
     flex-direction: column;
     align-items: stretch;
     width: 100%;
-    gap: 0;
+    /* Breaks the left borders of adjacent rows apart, so an active row
+       next to a hovered one doesn't read as one continuous line. */
+    gap: 4px;
     padding-top: 8px;
   }
 
