@@ -1,0 +1,7 @@
+# Local preview server — dev only, not part of the published site
+serve.ps1
+
+# OS cruft
+Thumbs.db
+desktop.ini
+.DS_Store

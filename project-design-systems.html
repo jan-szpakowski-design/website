@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design systems — Szpakowski design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="logo" href="index.html"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
+    <nav class="nav">
+      <a href="projects.html" aria-current="page">projects</a>
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <article class="content content--article">
+    <div><a class="link" href="projects.html">← Back to all projects</a></div>
+
+    <header class="section-header">
+      <h1>Design systems</h1>
+      <p class="intro">From fragmentation to a unified design language</p>
+    </header>
+
+    <section class="article-section">
+      <h2>Overview</h2>
+      <p>Over my tenure at Slideworx/mTab, I led the creation, evolution, and eventual consolidation of the platform's design systems. What started as independent designers working on features transformed into component libraries for distinct applications and evolved into a unified system — and ultimately led to a strategic decision to adopt Microsoft Fluent as our foundation.</p>
+      <p>As Head of Design, I drove the design system strategy and oversaw every stage of this journey.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Challenge</h2>
+      <p>When I started leading the team, there were no established design principles. Everything was designed based on current requirements, with no shared standards to fall back on. This was compounded by deep silos within engineering — the same solutions were often implemented differently, sometimes even within the same module. The result was a patchwork experience where users encountered inconsistent patterns, behaviours, and visual treatments across the platform.</p>
+      <p>The platform's modules Discover and Analyze were treated as distinct applications, both engineering and business and side. Each had fundamentally different UX requirements — Discover needed a clean, visually appealing interface for browsing, while Analyze required a dense, tool-heavy environment with multi-level context menus and popups to support complex analytical workflows.</p>
+      <p>On top of that, a growing library of advanced data visualisations started introducing it’s own set of solutions tailor made for every new case.</p>
+      <p>My role was to introduce consistency and unify the designs across every module of the application — while keeping each module distinctive enough to function as its own product.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Approach</h2>
+      <p>I built each system to serve its specific context. The Discover design system was based loosely on Google's flat design principles — prioritising clarity and visual appeal for a broad, non-technical user base.</p>
+      <p>The Analyze design system was more condensed and interaction-heavy, designed for power users who needed quick access to deep functionality.</p>
+      <p>The data visualisation component library sat alongside both, introducing consistency in how charts, graphs, and interactive visual elements were rendered across all mTab products.</p>
+      <p>As the platform matured, I led the effort to merge all three into a single unified mTab design system. The goal was to reduce duplication, create shared patterns where possible, and give designers and developers one source of truth.</p>
+      <p>This was aligning with engineering goals to unify technology used across mTab platform.</p>
+      <p>However, company-wide restructuring and the realities of maintaining a custom system forced a pragmatic reassessment. After combined research with the engineering team, we made the decision to abandon our custom system entirely and adopt Microsoft Fluent. This gave us a mature, well-documented foundation with an extensive component library — freeing both teams to focus on building product features rather than maintaining design infrastructure.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Outcome</h2>
+      <p>The move to Fluent accelerated design and development significantly. All new features and modules are now built on Fluent with mTab-specific modifications layered on top. Some legacy elements from the older systems still exist in the product, but these are being phased out progressively as modules are updated. The journey from no shared principles, through three fragmented systems, to one adopted standard gave the team a clear, shared language — and the pragmatic decision to let go of our custom work in favour of a better solution remains one of the most impactful calls we made.</p>
+    </section>
+
+    <div><a class="link" href="projects.html">← Back to all projects</a></div>
+  </article>
+
+  <script src="script.js"></script>
+</body>
+</html>

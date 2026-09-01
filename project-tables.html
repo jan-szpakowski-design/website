@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tables — Szpakowski design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="logo" href="index.html"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
+    <nav class="nav">
+      <a href="projects.html" aria-current="page">projects</a>
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <article class="content content--article">
+    <div><a class="link" href="projects.html">← Back to all projects</a></div>
+
+    <header class="section-header">
+      <h1>Tables</h1>
+      <p class="intro">Tabular reporting for data-driven stakeholders</p>
+    </header>
+
+    <figure class="figure">
+      <img src="assets/tables-1-table-view.png" alt="Table view">
+      <figcaption>Table view</figcaption>
+    </figure>
+
+    <section class="article-section">
+      <h2>Overview</h2>
+      <p>Tables is a module within Analyze (now Halo Reports) that gives report consumers a way to browse, interact with, and export raw cross-tabulation data directly inside the Report Viewer — without needing authoring permissions. As Head of Design, I led the concept and design of this module from the ground up.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Challenge</h2>
+      <p>Before Tables, the Viewer could only display designed slide-based reports built in Compose. If a stakeholder needed to see the raw tabular results of an analysis, they had to be given full authoring access — exposing them to unnecessary complexity and the risk of accidental edits. It was a real friction point: users who just needed to browse data were forced into a tool built for analysts. We needed a simple, clean interface that treated tabular data as a first-class reporting format alongside visual slides.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Approach</h2>
+      <p>I designed Tables as a new type of report page that sits alongside slides within the Viewer. Instead of a fixed slide canvas, a table page presents the full, unbounded cross-tabulation results with horizontal and vertical scrolling, clean formatting, titles, and footnotes. The interface needed to feel effortless for consumers while still offering meaningful interactivity — sorting, column freezing, parameter filtering, and Excel export. I worked closely with the team to ensure the experience was consistent with the broader Viewer patterns, so users moved between slides and tables without any friction.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Outcome</h2>
+      <p>Tables filled a critical gap in the reporting workflow. Authors gained a complete toolkit — polished visuals for storytelling in Compose, and raw data access for deep exploration in Tables. Stakeholders could finally browse, filter, and export the data they needed without ever touching the authoring tools.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>What’s next</h2>
+      <p>As the capabilities of reports grew we introduced a possibility to early view tables created in Reports an retired tables module.</p>
+    </section>
+
+    <figure class="figure">
+      <img src="assets/tables-2-start-screen.png" alt="Table module start screen">
+      <figcaption>Table module start screen</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/tables-3-select-kpis.png" alt="Generating table – selecting KPIs">
+      <figcaption>Generating table – selecting KPI’s</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/tables-4-select-parameters.png" alt="Generating table – selecting parameters">
+      <figcaption>Generating table – selecting parameters</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/tables-5-in-cell-visualization.png" alt="Table with in cell visualization">
+      <figcaption>Table with in cell visualization</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <img src="assets/tables-6-heat-map.png" alt="Table with heat-map option">
+      <figcaption>Table with heat-map option</figcaption>
+    </figure>
+
+    <div><a class="link" href="projects.html">← Back to all projects</a></div>
+  </article>
+
+  <script src="script.js"></script>
+</body>
+</html>

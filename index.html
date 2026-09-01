@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Szpakowski design</title>
+  <meta name="description" content="Jan Szpakowski — product designer, brand builder and design leader.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="logo" href="index.html"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
+    <nav class="nav">
+      <a href="projects.html">projects</a>
+      <a href="about.html">about</a>
+      <a href="contact.html">contact</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main class="content content--home">
+    <h1>Hello, I <span class="accent">design</span> products, <span class="accent">build</span> brands, and <span class="accent">lead</span> a design team. I spend most of my time turning <span class="accent">complex</span> problems into <span class="accent">simple</span> solutions.</h1>
+
+    <div class="home-projects">
+      <ul class="projects-list projects-list--home">
+        <li class="project-card">
+          <a href="project-halo.html">
+            <span class="thumb-frame"><img class="thumb" src="assets/thumb-halo.png" alt="Halo — decision intelligence platform"></span>
+            <div class="body"><span class="name">Halo interface</span></div>
+          </a>
+        </li>
+        <li class="project-card">
+          <a href="project-halo-branding.html">
+            <span class="thumb-frame"><img class="thumb" src="assets/thumb-halo-branding.png" alt="Halo brand mark"></span>
+            <div class="body"><span class="name">Halo Branding</span></div>
+          </a>
+        </li>
+        <li class="project-card">
+          <a href="project-data-visualization.html">
+            <span class="thumb-frame"><img class="thumb" src="assets/thumb-data-visualization.png" alt="Interactive data visualisation"></span>
+            <div class="body"><span class="name">Data visualisation</span></div>
+          </a>
+        </li>
+        <li class="project-card project-card--tablet-only">
+          <a href="project-leadership.html">
+            <span class="thumb-frame"><img class="thumb" src="assets/thumb-leadership.png" alt="Design team leadership"></span>
+            <div class="body"><span class="name">Design team leadership</span></div>
+          </a>
+        </li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="cta-link" href="projects.html">More of my work →</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

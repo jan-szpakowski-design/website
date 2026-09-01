@@ -1,0 +1,683 @@
+/* ===========================================================
+   Design tokens — from the Figma "Styles" frame
+   =========================================================== */
+:root {
+  color-scheme: light;
+
+  --color-text: #444444;
+  --color-description: #777777;
+  --color-accent: #7c3aed;
+  --color-accent-darker: #3b00a0;
+  --color-accent-50: rgba(124, 58, 237, 0.5);
+  --color-border: rgba(0, 0, 0, 0.16);
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+
+  --transition-duration: 180ms;
+  --zoom-duration: 300ms;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Product screenshots are light-on-light, so they need no edge here.
+     Dark mode fills this in to stop them glowing against the page. */
+  --image-edge: transparent;
+
+  --icon-sun-display: none;
+  --icon-moon-display: block;
+
+  --font-heading: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-body: "Lato", system-ui, -apple-system, sans-serif;
+
+  --content-max-width: 1200px;
+  --measure: 640px;
+  /* 884px image + the 8px padding the Figma screenshot frame carries */
+  --figure-max-width: 900px;
+}
+
+/* ===========================================================
+   Dark theme
+
+   The Figma palette is single-mode, so these values are derived
+   from it rather than specified: the accents lighten so they keep
+   their contrast against a dark ground, and text/description stay
+   off-white for the same reason #444 is not pure black in light.
+
+   Declared twice on purpose — once for the OS preference (unless
+   the reader has explicitly chosen light) and once for the
+   explicit toggle, so the toggle wins in both directions.
+   =========================================================== */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-text: #e9e9ec;
+    --color-description: #9b9ba4;
+    --color-accent: #a78bfa;
+    --color-accent-darker: #c4b5fd;
+    --color-accent-50: rgba(167, 139, 250, 0.5);
+    --color-border: rgba(255, 255, 255, 0.18);
+    --color-background: #131317;
+    --color-surface: #1c1c21;
+
+    --image-edge: rgba(255, 255, 255, 0.14);
+
+    --icon-sun-display: block;
+    --icon-moon-display: none;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-text: #e9e9ec;
+  --color-description: #9b9ba4;
+  --color-accent: #a78bfa;
+  --color-accent-darker: #c4b5fd;
+  --color-accent-50: rgba(167, 139, 250, 0.5);
+  --color-border: rgba(255, 255, 255, 0.18);
+  --color-background: #131317;
+  --color-surface: #1c1c21;
+
+  --image-edge: rgba(255, 255, 255, 0.14);
+
+  --icon-sun-display: block;
+  --icon-moon-display: none;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Always reserve the scrollbar gutter. Short pages (contact, about) have
+   no scrollbar while long ones (the case studies) do, and without this
+   the centred column jumps sideways by half a scrollbar on every such
+   navigation. Falls back to a permanently visible track where
+   scrollbar-gutter isn't supported. */
+html {
+  scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 64px;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.09px;
+  color: var(--color-text);
+  background: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/* ===========================================================
+   Typography
+   =========================================================== */
+h1,
+.h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -0.96px;
+}
+
+h2,
+.h2 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+}
+
+h3,
+.h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: -0.48px;
+}
+
+.intro {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 1.45;
+  letter-spacing: -0.72px;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+/* ===========================================================
+   App header
+   =========================================================== */
+/* Shares the content's max width so the logo and nav line up with the
+   page's left and right edges. */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--content-max-width);
+  padding: 20px 48px;
+  background: var(--color-background);
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: 0.48px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.logo-name {
+  font-weight: 400;
+  color: var(--color-accent);
+}
+
+.logo-suffix {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ===========================================================
+   Motion
+
+   Readers who ask their OS for less motion get the colour
+   changes but none of the movement.
+   =========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .project-card .thumb {
+    transition: none;
+  }
+
+  .project-card a:hover .thumb,
+  .project-card a:focus-visible .thumb {
+    transform: none;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav a {
+  display: block;
+  padding: 8px 12px;
+  /* Figma specifies Lato Medium, but Lato ships no 500 weight on Google
+     Fonts (100/300/400/700/900 only), so Regular is the real rendering. */
+  font-weight: 400;
+  font-size: 18px;
+  color: var(--color-description);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition:
+    color var(--transition-duration) var(--transition-ease),
+    border-bottom-color var(--transition-duration) var(--transition-ease);
+}
+
+.nav a:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent-50);
+}
+
+/* Declared after :hover on purpose — the current page keeps a solid
+   rule, so hovering it never dims the underline to the 50% tint. */
+.nav a[aria-current="page"] {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ===========================================================
+   Theme toggle
+   =========================================================== */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  color: var(--color-description);
+  background: none;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color var(--transition-duration) var(--transition-ease);
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle .icon-sun {
+  display: var(--icon-sun-display);
+}
+
+.theme-toggle .icon-moon {
+  display: var(--icon-moon-display);
+}
+
+/* ===========================================================
+   Page shells
+   =========================================================== */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: var(--content-max-width);
+  padding: 48px;
+}
+
+/* Home has a wider rhythm between the hero and the project grid */
+.content--home {
+  gap: 96px;
+  justify-content: center;
+  padding: 64px 48px;
+}
+
+.content--page {
+  gap: 36px;
+}
+
+/* Project case studies: narrow prose centred, wide figures */
+.content--article {
+  align-items: center;
+  gap: 36px;
+}
+
+.content--article > * {
+  width: 100%;
+  max-width: var(--measure);
+}
+
+.content--article > .figure {
+  max-width: var(--figure-max-width);
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding-bottom: 16px;
+}
+
+/* ===========================================================
+   Project cards
+   =========================================================== */
+.projects-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  list-style: none;
+}
+
+.projects-list--home {
+  gap: 24px;
+}
+
+/* A fourth card only in the two-column tablet range, so the home grid
+   fills a tidy 2×2 instead of leaving a lone card on the second row.
+   Desktop (3 across) and mobile (stacked) stay at three. */
+/* Scoped to the list so these outrank `.project-card { display: flex }`,
+   which is declared later at equal specificity. */
+.projects-list--home .project-card--tablet-only {
+  display: none;
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .projects-list--home .project-card--tablet-only {
+    display: flex;
+  }
+}
+
+/* Grid + "more work" link travel together under the hero */
+.home-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.projects-list--all {
+  gap: 36px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 400px;
+  min-width: 240px;
+}
+
+.project-card a {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* Clips the zoom so the scaled thumbnail stays inside the card, and
+   anchors the accent border that appears on hover. */
+.thumb-frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* The border rides on an overlay rather than the frame itself: it sits
+   above the zooming image and costs no layout, so nothing shifts. */
+.thumb-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  pointer-events: none;
+  transition: border-color var(--transition-duration) var(--transition-ease);
+}
+
+.project-card a:hover .thumb-frame::after,
+.project-card a:focus-visible .thumb-frame::after {
+  border-color: var(--color-accent);
+}
+
+.project-card .thumb {
+  width: 100%;
+  aspect-ratio: 160 / 90;
+  object-fit: cover;
+  background: var(--color-surface);
+  transition: transform var(--zoom-duration) var(--transition-ease);
+}
+
+.project-card a:hover .thumb,
+.project-card a:focus-visible .thumb {
+  transform: scale(1.05);
+}
+
+.project-card .body {
+  padding: 8px 4px;
+}
+
+.project-card .name {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.45;
+  letter-spacing: -0.1px;
+  color: var(--color-text);
+  transition: color var(--transition-duration) var(--transition-ease);
+}
+
+.project-card a:hover .name {
+  color: var(--color-accent);
+}
+
+/* ===========================================================
+   Links & CTA
+   =========================================================== */
+/* "Back to all projects" — reads as navigation, so it takes the nav's
+   resting colour and only picks up accent + underline on hover. */
+.link {
+  color: var(--color-description);
+  text-decoration: none;
+  transition: color var(--transition-duration) var(--transition-ease);
+}
+
+.link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-position: from-font;
+}
+
+.cta-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  /* 6px vertical trims the button's height ~20%: 60.8px → 48.8px.
+     (An exact 20% would need 5.92px; 6px keeps it on the pixel grid.) */
+  padding: 6px 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.45;
+  letter-spacing: 0.48px;
+  color: var(--color-accent-darker);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition:
+    color var(--transition-duration) var(--transition-ease),
+    border-bottom-color var(--transition-duration) var(--transition-ease);
+}
+
+.cta-link:hover {
+  border-bottom-color: var(--color-accent-darker);
+}
+
+/* ===========================================================
+   About — text + portrait
+   =========================================================== */
+.two-col {
+  display: flex;
+  align-items: flex-start;
+  gap: 64px;
+  width: 100%;
+}
+
+.two-col .col-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1 1 640px;
+  min-width: 1px;
+  max-width: 720px;
+}
+
+.portrait {
+  flex: 0 0 400px;
+  width: 400px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+}
+
+/* ===========================================================
+   Contact lines
+   =========================================================== */
+.contact-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.contact-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-line img {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+/* ===========================================================
+   Case-study sections & figures
+   =========================================================== */
+.article-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-section p + p {
+  margin-top: 1em;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+}
+
+.figure img {
+  width: 100%;
+  box-shadow: 0 0 0 1px var(--image-edge);
+}
+
+.figure figcaption {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-description);
+  text-align: center;
+}
+
+/* ===========================================================
+   Tablet
+   =========================================================== */
+@media (max-width: 1024px) {
+  .content {
+    padding: 32px;
+  }
+
+  .content--home {
+    gap: 64px;
+    padding: 48px 32px;
+  }
+
+  .projects-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .two-col {
+    gap: 40px;
+  }
+
+  .portrait {
+    flex-basis: 320px;
+    width: 320px;
+  }
+}
+
+/* ===========================================================
+   Mobile
+   =========================================================== */
+@media (max-width: 700px) {
+  h1,
+  .h1 {
+    font-size: 32px;
+    letter-spacing: -0.64px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 28px;
+    letter-spacing: -0.56px;
+  }
+
+  .intro {
+    font-size: 24px;
+    letter-spacing: -0.48px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 24px;
+  }
+
+  .nav {
+    gap: 8px;
+  }
+
+  .content {
+    padding: 24px;
+  }
+
+  .content--home {
+    gap: 40px;
+    padding: 24px;
+  }
+
+  .projects-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .project-card {
+    max-width: none;
+  }
+
+  .cta-row {
+    justify-content: center;
+  }
+
+  .two-col {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .two-col .col-text {
+    flex-basis: auto;
+  }
+
+  .portrait {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .figure {
+    padding: 0;
+  }
+}
