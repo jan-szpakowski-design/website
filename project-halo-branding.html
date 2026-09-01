@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halo branding — Szpakowski design</title>
+  <meta name="description" content="Creating a visual identity for Halo: logo system, colour palette and brand guidelines for a decision intelligence platform.">
+  <link rel="canonical" href="https://janszpakowski.pl/project-halo-branding.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,15 +15,21 @@
 <body>
   <header class="app-header">
     <a class="logo" href="index.html"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
-    <nav class="nav">
+    <nav class="nav" id="site-nav">
       <a href="projects.html" aria-current="page">projects</a>
       <a href="about.html">about</a>
       <a href="contact.html">contact</a>
+    </nav>
+    <div class="header-controls">
       <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
         <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
       </button>
-    </nav>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-menu" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
   </header>
 
   <article class="content content--article">
