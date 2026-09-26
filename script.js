@@ -12,11 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const syncThemeButton = () => {
       const isDark = activeTheme() === 'dark';
+      const label = isDark ? 'Switch to light theme' : 'Switch to dark theme';
       themeButton.setAttribute('aria-pressed', String(isDark));
-      themeButton.setAttribute(
-        'aria-label',
-        isDark ? 'Switch to light theme' : 'Switch to dark theme'
-      );
+      themeButton.setAttribute('aria-label', label);
+      themeButton.setAttribute('title', label);
     };
 
     themeButton.addEventListener('click', () => {

@@ -17,10 +17,6 @@
   --zoom-duration: 300ms;
   --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Product screenshots are light-on-light, so they need no edge here.
-     Dark mode fills this in to stop them glowing against the page. */
-  --image-edge: transparent;
-
   --icon-sun-display: none;
   --icon-moon-display: block;
 
@@ -58,7 +54,6 @@
     --color-background: #131317;
     --color-surface: #1c1c21;
 
-    --image-edge: rgba(255, 255, 255, 0.14);
 
     --icon-sun-display: block;
     --icon-moon-display: none;
@@ -77,7 +72,6 @@
   --color-background: #131317;
   --color-surface: #1c1c21;
 
-  --image-edge: rgba(255, 255, 255, 0.14);
 
   --icon-sun-display: block;
   --icon-moon-display: none;
@@ -160,6 +154,10 @@ h3,
   letter-spacing: -0.48px;
 }
 
+p {
+  line-height: 1.6em;
+}
+
 .intro {
   font-family: var(--font-heading);
   font-weight: 400;
@@ -216,12 +214,12 @@ h3,
 }
 
 .logo-name {
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-accent);
 }
 
 .logo-suffix {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text);
 }
 
@@ -466,18 +464,23 @@ h3,
 
 /* The border rides on an overlay rather than the frame itself: it sits
    above the zooming image and costs no layout, so nothing shifts. */
+/* Hairline at rest, thickening to the accent on hover. The overlay is
+   absolutely positioned, so changing its border width moves nothing. */
 .thumb-frame::after {
   content: "";
   position: absolute;
   inset: 0;
-  border: 2px solid transparent;
+  border: 1px solid var(--color-border);
   border-radius: 2px;
   pointer-events: none;
-  transition: border-color var(--transition-duration) var(--transition-ease);
+  transition:
+    border-color var(--transition-duration) var(--transition-ease),
+    border-width var(--transition-duration) var(--transition-ease);
 }
 
 .project-card a:hover .thumb-frame::after,
 .project-card a:focus-visible .thumb-frame::after {
+  border-width: 2px;
   border-color: var(--color-accent);
 }
 
@@ -495,7 +498,21 @@ h3,
 }
 
 .project-card .body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   padding: 8px 4px;
+}
+
+/* One-word discipline label under each project name. */
+.project-card .tag {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-description);
 }
 
 .project-card .name {
@@ -559,6 +576,49 @@ h3,
   border-bottom-color: var(--color-accent-darker);
 }
 
+.cta-row--split {
+  flex-wrap: wrap;
+  gap: 8px 32px;
+}
+
+/* ===========================================================
+   404
+   =========================================================== */
+.not-found {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+}
+
+.not-found-code {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(96px, 34vw, 440px);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--color-accent);
+}
+
+.not-found-note {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.64px;
+  color: var(--color-description);
+}
+
+@media (max-width: 700px) {
+  .not-found {
+    column-gap: 12px;
+  }
+
+  .not-found-note {
+    font-size: 24px;
+    letter-spacing: -0.48px;
+  }
+}
+
 /* ===========================================================
    About — text + portrait
    =========================================================== */
@@ -604,10 +664,13 @@ h3,
   gap: 16px;
 }
 
-.contact-line img {
+/* Inline Lucide icons draw in currentColor, so they pick up the accent
+   of whichever theme is active. */
+.contact-icon {
   flex-shrink: 0;
   width: 24px;
   height: 24px;
+  color: var(--color-accent);
 }
 
 /* ===========================================================
@@ -631,9 +694,13 @@ h3,
   margin: 0;
 }
 
+/* A hairline edge so screenshots read as objects on the page rather
+   than bleeding into the background. box-shadow rather than border so
+   it costs no layout and the image keeps its full width. */
 .figure img {
   width: 100%;
-  box-shadow: 0 0 0 1px var(--image-edge);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--color-border);
 }
 
 .figure figcaption {
@@ -752,7 +819,9 @@ h3,
 
   .projects-list {
     grid-template-columns: 1fr;
-    gap: 24px;
+    /* Stacked cards need more air than the desktop grid — side by side
+       the columns separate them, in one column only this gap does. */
+    gap: 40px;
   }
 
   .project-card {

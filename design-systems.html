@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design systems — Szpakowski design</title>
+  <meta name="description" content="Three competing design systems, one shared language, and the decision to drop it all for Microsoft Fluent.">
+  <link rel="canonical" href="https://janszpakowski.pl/design-systems">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,500;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();</script>
+</head>
+<body>
+  <header class="app-header">
+    <a class="logo" href="./"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
+    <nav class="nav" id="site-nav">
+      <a href="projects" aria-current="page">projects</a>
+      <a href="about">about</a>
+      <a href="contact">contact</a>
+    </nav>
+    <div class="header-controls">
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme" aria-pressed="false">
+        <svg class="icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="icon-moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </button>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <svg class="icon-menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+        <svg class="icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <article class="content content--article">
+    <div><a class="link" href="projects">← Back to all projects</a></div>
+
+    <header class="section-header">
+      <h1>Design systems</h1>
+      <p class="intro">From fragmentation to a unified design language</p>
+    </header>
+
+    <section class="article-section">
+      <h2>Overview</h2>
+      <p>Across my years at Slideworx and mTab I built, grew and eventually consolidated the platform's design systems. It started with designers working on features in isolation, became component libraries for separate applications, then one unified system, and finally the decision to drop all of it and move to Microsoft Fluent. As Head of Design I set the design system strategy and was involved at every stage of it.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Challenge</h2>
+      <p>When I took over the team there were no design principles to speak of. Everything got designed against whatever the current requirement was, with no shared standards to fall back on. Engineering was deeply siloed as well, so the same problem often got solved two or three different ways, sometimes inside the same module. What users got was a patchwork of inconsistent patterns, behaviours and visual treatments.</p>
+      <p>Discover and Analyze (now Reports) were treated as separate applications by both Engineering and the business, and their needs really were different. Discover had to be clean and easy on the eye for browsing. Analyze had to be dense and tool-heavy, with nested menus and popups to support serious analytical work. On top of that, a growing library of advanced data visualisations began introducing its own solutions, tailor-made for each new case. My job was to bring consistency across every module while letting each one keep enough character to stand on its own.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>My role</h2>
+      <p>I built each system for its own context. Discover leaned loosely on Google's flat design principles, favouring clarity and visual appeal for a broad, non-technical audience. The Analyze design system was more condensed and interaction-heavy, designed for power users who needed quick access to deep functionality. The data visualisation component library sat alongside both, introducing consistency in how charts, graphs, and interactive visual elements were rendered across all mTab products.</p>
+      <p>As the platform matured, I led the effort to merge all three into a single unified mTab design system. The goal was to reduce duplication, create shared patterns where possible, and give designers and developers one source of truth. This aligned with Engineering's goal of unifying the technology used across the mTab platform.</p>
+      <p>Then company restructuring, plus the plain reality of maintaining a custom system, forced a rethink. After researching it jointly with Engineering we dropped our own system entirely and moved to Microsoft Fluent. That gave us a mature, well-documented base with a huge component library, and freed both teams to build product instead of maintaining design infrastructure.</p>
+    </section>
+
+    <section class="article-section">
+      <h2>Outcome</h2>
+      <p>Moving to Fluent sped up design and development noticeably. Every new feature and module is built on it now, with mTab-specific tweaks layered on top. Bits of the older systems are still in the product, but they get retired as modules are updated. Going from no shared principles, through three competing systems, to one adopted standard finally gave the team a common language. Letting go of work we had put years into, because something better already existed, is still one of the best calls we made.</p>
+    </section>
+
+    <div><a class="link" href="projects">← Back to all projects</a></div>
+  </article>
+
+  <script src="script.js"></script>
+  <script data-goatcounter="https://janszpakowski.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
