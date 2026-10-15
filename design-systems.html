@@ -14,7 +14,7 @@
 </head>
 <body>
   <header class="app-header">
-    <a class="logo" href="./"><span class="logo-name">Szpakowski</span><span class="logo-suffix">design</span></a>
+    <a class="logo" href="./" aria-label="Szpakowski design"><span class="logo-name">Szpakowski</span><span class="logo-gap"> </span><span class="logo-suffix">design</span></a>
     <nav class="nav" id="site-nav">
       <a href="projects" aria-current="page">projects</a>
       <a href="about">about</a>
@@ -63,7 +63,10 @@
       <p>Moving to Fluent sped up design and development noticeably. Every new feature and module is built on it now, with mTab-specific tweaks layered on top. Bits of the older systems are still in the product, but they get retired as modules are updated. Going from no shared principles, through three competing systems, to one adopted standard finally gave the team a common language. Letting go of work we had put years into, because something better already existed, is still one of the best calls we made.</p>
     </section>
 
-    <div><a class="link" href="projects">← Back to all projects</a></div>
+    <nav class="project-pager" aria-label="More projects">
+      <a class="link" href="projects">← Back to all projects</a>
+      <a class="link" href="mtab-design-team">Next project: mTab Design team →</a>
+    </nav>
   </article>
 
   <script src="script.js"></script>
