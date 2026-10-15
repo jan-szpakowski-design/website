@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.documentElement;
 
+  // iOS Safari only applies :active styles on pages that listen for
+  // touches, so this empty listener switches on the tap feedback.
+  document.addEventListener('touchstart', () => {}, { passive: true });
+
   /* ---------- Theme toggle ---------- */
   const themeButton = document.querySelector('.theme-toggle');
   if (themeButton) {
@@ -18,8 +22,18 @@ document.addEventListener('DOMContentLoaded', () => {
       themeButton.setAttribute('title', label);
     };
 
+    // Eases the colours for the length of the switch only (see
+    // .theme-transition in style.css); reduced motion is handled there.
+    let easeTimer;
+    const easeThemeChange = () => {
+      clearTimeout(easeTimer);
+      root.classList.add('theme-transition');
+      easeTimer = setTimeout(() => root.classList.remove('theme-transition'), 250);
+    };
+
     themeButton.addEventListener('click', () => {
       const next = activeTheme() === 'dark' ? 'light' : 'dark';
+      easeThemeChange();
       root.setAttribute('data-theme', next);
       try {
         localStorage.setItem('theme', next);

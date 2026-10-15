@@ -15,6 +15,8 @@
 
   --transition-duration: 180ms;
   --zoom-duration: 300ms;
+  --press-duration: 100ms;
+  --theme-duration: 200ms;
   --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   --icon-sun-display: none;
@@ -100,16 +102,19 @@ html {
   }
 }
 
+/* Type sizes are in rem so they follow the reader's browser font-size
+   setting (1rem = 16px by default), and tracking is in em so it scales
+   with the text it belongs to. */
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 64px;
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   line-height: 1.45;
-  letter-spacing: -0.09px;
+  letter-spacing: -0.005em;
   color: var(--color-text);
   background: var(--color-background);
   -webkit-font-smoothing: antialiased;
@@ -124,6 +129,13 @@ a {
   color: inherit;
 }
 
+/* Links and buttons show their own :active state, so the grey flash
+   mobile browsers draw on tap would only double it up. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* ===========================================================
    Typography
    =========================================================== */
@@ -131,27 +143,27 @@ h1,
 .h1 {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1.1;
-  letter-spacing: -0.96px;
+  letter-spacing: -0.02em;
 }
 
 h2,
 .h2 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 40px;
+  font-size: 2.5rem;
   line-height: 1.1;
-  letter-spacing: -0.8px;
+  letter-spacing: -0.02em;
 }
 
 h3,
 .h3 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.5;
-  letter-spacing: -0.48px;
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -161,9 +173,9 @@ p {
 .intro {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 1.45;
-  letter-spacing: -0.72px;
+  letter-spacing: -0.02em;
 }
 
 .accent {
@@ -201,16 +213,24 @@ p {
 .logo {
   margin-right: auto;
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 1.5rem;
   line-height: 1.5;
-  letter-spacing: 0.48px;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   text-decoration: none;
   transition: opacity var(--transition-duration) var(--transition-ease);
 }
 
-.logo:hover {
-  opacity: 0.9;
+/* Hover styles sit behind (hover: hover) throughout, so on touch screens
+   a tap doesn't leave them stuck on; :active gives the tap feedback. */
+@media (hover: hover) {
+  .logo:hover {
+    opacity: 0.9;
+  }
+}
+
+.logo:active {
+  opacity: 0.7;
 }
 
 .logo-name {
@@ -221,23 +241,6 @@ p {
 .logo-suffix {
   font-weight: 700;
   color: var(--color-text);
-}
-
-/* ===========================================================
-   Motion
-
-   Readers who ask their OS for less motion get the colour
-   changes but none of the movement.
-   =========================================================== */
-@media (prefers-reduced-motion: reduce) {
-  .project-card .thumb {
-    transition: none;
-  }
-
-  .project-card a:hover .thumb,
-  .project-card a:focus-visible .thumb {
-    transform: none;
-  }
 }
 
 .nav {
@@ -252,7 +255,7 @@ p {
   /* Figma specifies Lato Medium, but Lato ships no 500 weight on Google
      Fonts (100/300/400/700/900 only), so Regular is the real rendering. */
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1.125rem;
   color: var(--color-description);
   text-align: center;
   text-decoration: none;
@@ -265,9 +268,15 @@ p {
     border-color var(--transition-duration) var(--transition-ease);
 }
 
-.nav a:hover {
-  color: var(--color-accent);
-  border-bottom-color: var(--color-accent-50);
+@media (hover: hover) {
+  .nav a:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent-50);
+  }
+}
+
+.nav a:active {
+  opacity: 0.7;
 }
 
 /* Declared after :hover on purpose — the current page keeps a solid
@@ -296,8 +305,14 @@ p {
   transition: color var(--transition-duration) var(--transition-ease);
 }
 
-.theme-toggle:hover {
-  color: var(--color-accent);
+@media (hover: hover) {
+  .theme-toggle:hover {
+    color: var(--color-accent);
+  }
+}
+
+.theme-toggle:active {
+  opacity: 0.7;
 }
 
 .theme-toggle:focus-visible {
@@ -311,6 +326,20 @@ p {
 
 .theme-toggle .icon-moon {
   display: var(--icon-moon-display);
+}
+
+/* Applied by script.js for the length of a theme switch only, so the
+   page eases between light and dark instead of flashing. It overrides
+   every other transition while it's on, which is why it's temporary. */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition:
+    background-color var(--theme-duration) ease,
+    color var(--theme-duration) ease,
+    border-color var(--theme-duration) ease,
+    box-shadow var(--theme-duration) ease !important;
 }
 
 /* ===========================================================
@@ -331,8 +360,14 @@ p {
   transition: color var(--transition-duration) var(--transition-ease);
 }
 
-.nav-toggle:hover {
-  color: var(--color-accent);
+@media (hover: hover) {
+  .nav-toggle:hover {
+    color: var(--color-accent);
+  }
+}
+
+.nav-toggle:active {
+  opacity: 0.7;
 }
 
 .nav-toggle:focus-visible {
@@ -460,6 +495,13 @@ p {
   display: block;
   overflow: hidden;
   border-radius: 2px;
+  transition: transform var(--press-duration) ease-out;
+}
+
+/* A slight press-in, so a tap on a card registers before the next
+   page loads. */
+.project-card a:active .thumb-frame {
+  transform: scale(0.98);
 }
 
 /* The border rides on an overlay rather than the frame itself: it sits
@@ -478,7 +520,13 @@ p {
     border-width var(--transition-duration) var(--transition-ease);
 }
 
-.project-card a:hover .thumb-frame::after,
+@media (hover: hover) {
+  .project-card a:hover .thumb-frame::after {
+    border-width: 2px;
+    border-color: var(--color-accent);
+  }
+}
+
 .project-card a:focus-visible .thumb-frame::after {
   border-width: 2px;
   border-color: var(--color-accent);
@@ -492,7 +540,12 @@ p {
   transition: transform var(--zoom-duration) var(--transition-ease);
 }
 
-.project-card a:hover .thumb,
+@media (hover: hover) {
+  .project-card a:hover .thumb {
+    transform: scale(1.05);
+  }
+}
+
 .project-card a:focus-visible .thumb {
   transform: scale(1.05);
 }
@@ -508,7 +561,7 @@ p {
 .project-card .tag {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 1.45;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -517,16 +570,19 @@ p {
 
 .project-card .name {
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 20px;
+  /* Regular, not Medium: Lato has no 500 weight (see .nav a). */
+  font-weight: 400;
+  font-size: 1.25rem;
   line-height: 1.45;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.005em;
   color: var(--color-text);
   transition: color var(--transition-duration) var(--transition-ease);
 }
 
-.project-card a:hover .name {
-  color: var(--color-accent);
+@media (hover: hover) {
+  .project-card a:hover .name {
+    color: var(--color-accent);
+  }
 }
 
 /* ===========================================================
@@ -540,10 +596,16 @@ p {
   transition: color var(--transition-duration) var(--transition-ease);
 }
 
-.link:hover {
-  color: var(--color-accent);
-  text-decoration: underline;
-  text-underline-position: from-font;
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-position: from-font;
+  }
+}
+
+.link:active {
+  opacity: 0.7;
 }
 
 .cta-row {
@@ -559,10 +621,11 @@ p {
      (An exact 20% would need 5.92px; 6px keeps it on the pixel grid.) */
   padding: 6px 8px;
   font-family: var(--font-body);
-  font-weight: 500;
-  font-size: 24px;
+  /* Regular, not Medium: Lato has no 500 weight (see .nav a). */
+  font-weight: 400;
+  font-size: 1.5rem;
   line-height: 1.45;
-  letter-spacing: 0.48px;
+  letter-spacing: -0.01em;
   color: var(--color-accent-darker);
   text-decoration: none;
   white-space: nowrap;
@@ -572,8 +635,14 @@ p {
     border-bottom-color var(--transition-duration) var(--transition-ease);
 }
 
-.cta-link:hover {
-  border-bottom-color: var(--color-accent-darker);
+@media (hover: hover) {
+  .cta-link:hover {
+    border-bottom-color: var(--color-accent-darker);
+  }
+}
+
+.cta-link:active {
+  opacity: 0.7;
 }
 
 .cta-row--split {
@@ -594,7 +663,7 @@ p {
 .not-found-code {
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: clamp(96px, 34vw, 440px);
+  font-size: clamp(6rem, 34vw, 27.5rem);
   line-height: 0.85;
   letter-spacing: -0.05em;
   color: var(--color-accent);
@@ -603,8 +672,8 @@ p {
 .not-found-note {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: 32px;
-  letter-spacing: -0.64px;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
   color: var(--color-description);
 }
 
@@ -614,8 +683,7 @@ p {
   }
 
   .not-found-note {
-    font-size: 24px;
-    letter-spacing: -0.48px;
+    font-size: 1.5rem;
   }
 }
 
@@ -705,7 +773,7 @@ p {
 
 .figure figcaption {
   font-style: italic;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: var(--color-description);
   text-align: center;
 }
@@ -743,19 +811,16 @@ p {
 @media (max-width: 700px) {
   h1,
   .h1 {
-    font-size: 32px;
-    letter-spacing: -0.64px;
+    font-size: 2rem;
   }
 
   h2,
   .h2 {
-    font-size: 28px;
-    letter-spacing: -0.56px;
+    font-size: 1.75rem;
   }
 
   .intro {
-    font-size: 24px;
-    letter-spacing: -0.48px;
+    font-size: 1.5rem;
   }
 
   /* Logo and controls share the top row; the nav wraps onto its own
@@ -782,8 +847,11 @@ p {
     padding-top: 8px;
   }
 
+  /* Drops in from under the toggle, so the menu reads as coming from
+     the button rather than appearing out of nowhere. */
   .nav[data-open="true"] {
     display: flex;
+    animation: nav-open var(--transition-duration) var(--transition-ease);
   }
 
   /* Full-width rows read better than centred pills when stacked, and a
@@ -799,8 +867,10 @@ p {
     border-left: 2px solid transparent;
   }
 
-  .nav a:hover {
-    border-left-color: var(--color-accent-50);
+  @media (hover: hover) {
+    .nav a:hover {
+      border-left-color: var(--color-accent-50);
+    }
   }
 
   /* After :hover, so the current page keeps the solid rule. */
@@ -848,5 +918,43 @@ p {
 
   .figure {
     padding: 0;
+  }
+}
+
+@keyframes nav-open {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* ===========================================================
+   Motion
+
+   Readers who ask their OS for less motion get the colour
+   changes but none of the movement. Kept last so it outranks
+   the hover, focus and press rules above at equal specificity.
+   =========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .project-card .thumb,
+  .thumb-frame {
+    transition: none;
+  }
+
+  .project-card a:hover .thumb,
+  .project-card a:focus-visible .thumb,
+  .project-card a:active .thumb-frame {
+    transform: none;
+  }
+
+  .nav[data-open="true"] {
+    animation: none;
+  }
+
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
   }
 }
