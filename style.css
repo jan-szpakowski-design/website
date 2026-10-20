@@ -34,8 +34,6 @@
 
   --content-max-width: 75rem;
   --measure: 40rem;
-  /* 884px image + the 8px padding the Figma screenshot frame carries */
-  --figure-max-width: 56.25rem;
 }
 
 /* ===========================================================
@@ -450,9 +448,12 @@ p {
   gap: 2.25rem;
 }
 
-/* Project case studies: narrow prose centred, wide figures */
+/* Project case studies follow the About page: the same page width and
+   left edge, text at About's 640px measure, and every image at one
+   consistent width — the full content width — with the title and the
+   closing pager spanning it too. */
 .content--article {
-  align-items: center;
+  align-items: flex-start;
   gap: 2.25rem;
 }
 
@@ -461,8 +462,23 @@ p {
   max-width: var(--measure);
 }
 
+.content--article > .section-header,
+.content--article > .project-pager {
+  max-width: none;
+}
+
+/* One width for every image, capped at 884px — the size most screenshots
+   were exported at — so none is stretched past its real pixels and goes
+   soft. In px, not rem, because the limit is the image files themselves.
+   Once larger exports (~2200px) are uploaded, set this to none to run
+   images the full page width. */
 .content--article > .figure {
-  max-width: var(--figure-max-width);
+  max-width: 884px;
+}
+
+/* The line under each project title is set in the accent colour. */
+.content--article .intro {
+  color: var(--color-accent);
 }
 
 .section-header {
@@ -794,11 +810,11 @@ p {
   margin-top: 1em;
 }
 
+/* No padding, so image edges line up with the text and the page edges. */
 .figure {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5rem;
   margin: 0;
 }
 
@@ -821,21 +837,30 @@ p {
 /* ===========================================================
    End of a case study — back to the list, or on to the next one
    =========================================================== */
-/* Both are plain .link text links; the next one sits at the right edge,
-   and drops below on narrow screens while staying right-aligned. */
-.project-pager {
+/* Three related projects, as cards like the home page's, each block
+   opened by its own separator, then the back link. */
+.related {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding-top: 1.5rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 2.25rem;
   border-top: 1px solid var(--color-border);
 }
 
-.project-pager .link + .link {
-  margin-left: auto;
-  text-align: right;
+.content--article > .related {
+  max-width: none;
+}
+
+/* Two to a row on tablets: show two rather than leave one on its own. */
+@media (min-width: 43.8125em) and (max-width: 64em) {
+  .related .project-card:nth-child(3) {
+    display: none;
+  }
+}
+
+.project-pager {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
 }
 
 /* ===========================================================
